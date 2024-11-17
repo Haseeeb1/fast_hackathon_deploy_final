@@ -27,7 +27,7 @@ const HorizontalScollCard = ({
       lastTranscriptRef.current = transcript;
       const command = transcript.toLowerCase().trim();
 
-      console.log(command);
+      //console.log(command);
 
       // Create section-specific voice commands
       const nextCommands = [

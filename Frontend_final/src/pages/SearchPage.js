@@ -29,9 +29,9 @@ const SearchPage = () => {
       setData((prev) => {
         return [...prev, ...response.data.results]; // Update state with new data
       });
-      console.log(response.data); // Log the response data to the console for debugging
+      //console.log(response.data); // Log the response data to the console for debugging
     } catch (error) {
-      console.log("error", error); // Log any errors
+      //console.log("error", error); // Log any errors
     }
   };
 

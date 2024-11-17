@@ -160,7 +160,7 @@ exports.getTrendingData = async (req, res) => {
 //         },
 //       }
 //     );
-//     console.log("response", response.data);
+//     //console.log("response", response.data);
 //     res.status(200).json(response.data);
 //   } catch (error) {
 //     console.error("Error fetching trending data:", error.message);
@@ -464,10 +464,10 @@ let cachedResults = []; // Temporary storage to append the results
 
 // Function to handle the search request
 // exports.searchData = async (req, res) => {
-//   console.log("hdllo");
+//   //console.log("hdllo");
 //   const { query, page } = req.query; // Extract query and page parameters from the request
-//   console.log("hello");
-//   console.log(query, page);
+//   //console.log("hello");
+//   //console.log(query, page);
 
 //   try {
 //     // Call TMDB search/multi API
@@ -487,8 +487,8 @@ let cachedResults = []; // Temporary storage to append the results
 //     // Append the new results to the cachedResults array
 //     cachedResults = [...cachedResults, ...response.data.results];
 
-//     // Log the response data (mimicking console.log(response.data))
-//     console.log(response.data);
+//     // Log the response data (mimicking //console.log(response.data))
+//     //console.log(response.data);
 
 //     // Send a success response back to the frontend
 //     res

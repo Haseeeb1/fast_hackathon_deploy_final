@@ -136,14 +136,14 @@ const Home = () => {
       lastTranscriptRef.current = transcript;
       const command = transcript.toLowerCase().trim();
 
-      console.log("Command received:", command);
+      //console.log("Command received:", command);
 
       // Handle Cinema Selection
       cinemas.forEach((cinemaName) => {
         const cinemaCommand = `cinema ${cinemaName.toLowerCase()}`;
         if (command.includes(cinemaCommand)) {
           setCinema(cinemaName);
-          console.log(`Cinema selected: ${cinemaName}`);
+          //console.log(`Cinema selected: ${cinemaName}`);
         }
       });
 
@@ -152,7 +152,7 @@ const Home = () => {
         const cityCommand = `city ${cityName.toLowerCase()}`;
         if (command.includes(cityCommand)) {
           setCity(cityName);
-          console.log(`City selected: ${cityName}`);
+          //console.log(`City selected: ${cityName}`);
         }
       });
 
@@ -162,7 +162,7 @@ const Home = () => {
         const genreCommand = `genre ${genreName.toLowerCase()}`;
         if (command.includes(genreCommand)) {
           setGenre(genreId);
-          console.log(`Genre selected: ${genreName}`);
+          //console.log(`Genre selected: ${genreName}`);
         }
       });
     }
@@ -175,7 +175,7 @@ const Home = () => {
   const { data: popularTvShowData } = useFetch("/tv/popular");
   const { data: onTheAirShowData } = useFetch("/tv/on_the_air");
 
-  console.log(nowPlayingData);
+  //console.log(nowPlayingData);
 
   // States to store filtered data
   const [filteredNowPlaying, setFilteredNowPlaying] = useState(nowPlayingData);
@@ -227,7 +227,7 @@ const Home = () => {
   // Filter by City
   useEffect(() => {
     const applyCityFilter = (data) => {
-      console.log("city", city, "data", data);
+      //console.log("city", city, "data", data);
       return city ? data.filter((item) => item.city === city) : data;
     };
 

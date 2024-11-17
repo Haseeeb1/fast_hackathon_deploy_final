@@ -16,7 +16,7 @@ const Header = () => {
 
   useEffect(() => {
     if (searchInput) {
-      console.log("Search input is ", searchInput);
+      //console.log("Search input is ", searchInput);
       navigate(`/search?q=${searchInput}`);
     }
   }, [searchInput, navigate]);
@@ -26,7 +26,7 @@ const Header = () => {
       lastTranscriptRef.current = transcript;
       const command = transcript.toLowerCase().trim();
 
-      console.log(command);
+      //console.log(command);
 
       navigation.forEach((nav) => {
         const labelLower = nav.label.toLowerCase();
@@ -45,7 +45,7 @@ const Header = () => {
         else if (searchCommands.some((cmd) => command.startsWith(cmd))) {
           // Extract the search term
           const searchQuery = command.replace("search", "").trim();
-          console.log("Search Query:", searchQuery);
+          //console.log("Search Query:", searchQuery);
 
           // Update the search input state
           setSearchInput(searchQuery);
