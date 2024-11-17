@@ -5,6 +5,7 @@ import HorizontalScollCard from "../components/HorizontalScollCard";
 import { Grid, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import useFetch from "../hooks/useFetch";
 import "intro.js/introjs.css";
+import { useMicrophone } from "../context/MicrophoneContext";
 
 // Define dynamic genre mappings and filter lists
 const movieGenreMap = {
@@ -125,46 +126,45 @@ const Home = () => {
   const [mediaType, setMediaType] = useState("movie"); // Can switch between 'movie' or 'tv'
 
   const { transcript } = useMicrophone(); // Microphone context hook
-  const lastTranscriptRef = useRef(""); 
+  const lastTranscriptRef = useRef("");
 
   useEffect(() => {
     if (transcript && transcript !== lastTranscriptRef.current) {
-        lastTranscriptRef.current = transcript;
-        const command = transcript.toLowerCase().trim();
+      lastTranscriptRef.current = transcript;
+      const command = transcript.toLowerCase().trim();
 
-        console.log("Command received:", command);
+      console.log("Command received:", command);
 
-        // Handle Cinema Selection
-        cinemas.forEach((cinemaName) => {
-            const cinemaCommand = `cinema ${cinemaName.toLowerCase()}`;
-            if (command.includes(cinemaCommand)) {
-                setCinema(cinemaName);
-                console.log(`Cinema selected: ${cinemaName}`);
-            }
-        });
+      // Handle Cinema Selection
+      cinemas.forEach((cinemaName) => {
+        const cinemaCommand = `cinema ${cinemaName.toLowerCase()}`;
+        if (command.includes(cinemaCommand)) {
+          setCinema(cinemaName);
+          console.log(`Cinema selected: ${cinemaName}`);
+        }
+      });
 
-        // Handle City Selection
-        cities.forEach((cityName) => {
-            const cityCommand = `city ${cityName.toLowerCase()}`;
-            if (command.includes(cityCommand)) {
-                setCity(cityName);
-                console.log(`City selected: ${cityName}`);
-            }
-        });
+      // Handle City Selection
+      cities.forEach((cityName) => {
+        const cityCommand = `city ${cityName.toLowerCase()}`;
+        if (command.includes(cityCommand)) {
+          setCity(cityName);
+          console.log(`City selected: ${cityName}`);
+        }
+      });
 
-        // Handle Genre Selection
-        const genreMap = mediaType === "movie" ? movieGenreMap : tvGenreMap;
-        Object.entries(genreMap).forEach(([genreId, genreName]) => {
-            const genreCommand = `genre ${genreName.toLowerCase()}`;
-            if (command.includes(genreCommand)) {
-                setGenre(genreId);
-                console.log(`Genre selected: ${genreName}`);
-            }
-        });
+      // Handle Genre Selection
+      const genreMap = mediaType === "movie" ? movieGenreMap : tvGenreMap;
+      Object.entries(genreMap).forEach(([genreId, genreName]) => {
+        const genreCommand = `genre ${genreName.toLowerCase()}`;
+        if (command.includes(genreCommand)) {
+          setGenre(genreId);
+          console.log(`Genre selected: ${genreName}`);
+        }
+      });
     }
-}, [transcript, mediaType, cinemas, cities]);
+  }, [transcript, mediaType, cinemas, cities]);
 
-  
   // Fetched data
   const trendingData = useSelector((state) => state.movieoData.bannerData);
   const { data: nowPlayingData } = useFetch("/movie/now_playing");

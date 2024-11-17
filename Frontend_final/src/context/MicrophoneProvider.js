@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { MicrophoneContext } from './MicrophoneContext';
+import React, { useState, useEffect } from "react";
+import { MicrophoneContext } from "./MicrophoneContext";
 
 export const MicrophoneProvider = ({ children }) => {
-  const [transcript, setTranscript] = useState('');
+  const [transcript, setTranscript] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     // Check if browser supports speech recognition
-    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-      setError('Speech recognition is not supported in this browser.');
+    if (
+      !("webkitSpeechRecognition" in window) &&
+      !("SpeechRecognition" in window)
+    ) {
+      setError("Speech recognition is not supported in this browser.");
       return;
     }
 
     // Initialize speech recognition
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognitionInstance = new SpeechRecognition();
 
     recognitionInstance.continuous = true;
     recognitionInstance.interimResults = true;
-    recognitionInstance.lang = 'en-US';
+    recognitionInstance.lang = "en-US";
 
     recognitionInstance.onstart = () => {
       setIsListening(true);
@@ -83,7 +87,7 @@ export const MicrophoneProvider = ({ children }) => {
     isListening,
     error,
     startListening,
-    stopListening
+    stopListening,
   };
 
   return (
