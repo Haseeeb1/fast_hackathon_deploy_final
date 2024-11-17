@@ -11,9 +11,13 @@ import { store } from "./store/store";
 import { MicrophoneProvider } from "./context/MicrophoneProvider";
 
 /**setup axios */
-axios.defaults.baseURL =
-  "https://fast-hackathon-deploy-backend.vercel.app/api/tmdb";
+// axios.defaults.baseURL =
+// "https://fast-hackathon-deploy-backend.vercel.app/api/tmdb";
 // axios.defaults.headers.common['Authorization'] = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNTllMGRhZTE1OWI3NTIxNmRjNDYzN2JhYTEwNTVhYyIsIm5iZiI6MTczMTgyNDE3NC4xMDU2NjE2LCJzdWIiOiI2MzI3ZjUyMzNiZDI2ZTAwODM1ODJlMDAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.T35RdapBs1KsMTAxjz360mQqf8ViIFSNfkxDVQzyLrE`
+axios.defaults.baseURL = "https://api.themoviedb.org/3";
+axios.defaults.headers.common[
+  "Authorization"
+] = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNTllMGRhZTE1OWI3NTIxNmRjNDYzN2JhYTEwNTVhYyIsIm5iZiI6MTczMTgyNDE3NC4xMDU2NjE2LCJzdWIiOiI2MzI3ZjUyMzNiZDI2ZTAwODM1ODJlMDAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.T35RdapBs1KsMTAxjz360mQqf8ViIFSNfkxDVQzyLrE`;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
