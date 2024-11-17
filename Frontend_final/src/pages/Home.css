@@ -1,0 +1,36 @@
+/* Change font color to black */
+.introjs-tooltip {
+    color: black !important; /* Set text color to black */
+    font-size: 14px; /* Adjust font size */
+}
+
+/* Optional: Customize tooltip background */
+.introjs-tooltip {
+    background-color: #fff !important; /* Set a white background */
+    border: 1px solid #ccc; /* Add a border for clarity */
+}
+
+/* Optional: Customize the title text */
+.introjs-tooltip-title {
+    font-weight: bold; /* Make the title bold */
+}
+
+/* Optional: Adjust button styles */
+.introjs-button {
+    background-color: #007bff !important; /* Button background color */
+    color: white !important; /* Button text color */
+    border-radius: 4px; /* Add rounded corners */
+}
+
+.introjs-skipbutton,
+.introjs-prevbutton,
+.introjs-nextbutton {
+    color: white !important; /* Button text color */
+    font-weight: 100;
+}
+
+/* Optional: Change the step indicator styles */
+.introjs-helperNumberLayer {
+    background-color: black !important; /* Circle background */
+    color: white !important; /* Number color */
+}

@@ -6,6 +6,9 @@ import { Grid, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import useFetch from "../hooks/useFetch";
 import "intro.js/introjs.css";
 import { useMicrophone } from "../context/MicrophoneContext";
+import "./Home.css";
+import "intro.js/introjs.css";
+import { Steps } from "intro.js-react";
 
 // Define dynamic genre mappings and filter lists
 const movieGenreMap = {
@@ -240,7 +243,6 @@ const Home = () => {
   const handleCityChange = (e) => setCity(e.target.value);
   // const handleMediaTypeChange = (e) => setMediaType(e.target.value);
 
-  // Guided Tour Steps
   const steps = [
     {
       element: ".cinema-selector",
@@ -257,26 +259,39 @@ const Home = () => {
       intro: "Pick a city to filter the movies and TV shows based on location.",
     },
     {
-      element: ".now-playing-card",
+      element: ".nowplaying",
       intro:
         "Here you can see the movies that are currently playing in cinemas.",
     },
     {
-      element: ".top-rated-movies-card",
+      element: ".toprated",
       intro: "Explore the top-rated movies across different genres.",
     },
     {
-      element: ".popular-tv-show-card",
+      element: ".popular",
       intro: "Check out the most popular TV shows right now.",
     },
     {
-      element: ".on-the-air-card",
+      element: ".onair",
       intro: "Find out which TV shows are currently on air.",
     },
   ];
+  const [tourIsOpen, setTourIsOpen] = useState(true);
+  useEffect(() => {
+    if (tourIsOpen) {
+      // Automatically open the tour
+      setTourIsOpen(true);
+    }
+  }, []);
 
   return (
     <div>
+      <Steps
+        enabled={tourIsOpen}
+        steps={steps}
+        initialStep={0}
+        onExit={() => setTourIsOpen(false)}
+      />
       <BannerHome />
       {/* Filter Section */}
       <Grid
@@ -285,7 +300,7 @@ const Home = () => {
         justifyContent="center"
         style={{ marginTop: "20px", padding: "0 20px" }}
       >
-        <Grid item>
+        <Grid item className="cinema-selector">
           <FormControl
             variant="outlined"
             style={{
@@ -317,7 +332,7 @@ const Home = () => {
           </FormControl>
         </Grid>
 
-        <Grid item>
+        <Grid item className="genre-selector">
           <FormControl
             variant="outlined"
             style={{
@@ -355,7 +370,7 @@ const Home = () => {
           </FormControl>
         </Grid>
 
-        <Grid item>
+        <Grid item className="city-selector">
           <FormControl
             variant="outlined"
             style={{
@@ -386,63 +401,40 @@ const Home = () => {
             </Select>
           </FormControl>
         </Grid>
-
-        {/* <Grid item>
-          <FormControl
-            variant="outlined"
-            style={{
-              minWidth: 180,
-              backgroundColor: "#333",
-              borderRadius: "5px",
-            }}
-          >
-            <InputLabel style={{ color: "#fff" }}>Media Type</InputLabel>
-            <Select
-              value={mediaType}
-              onChange={handleMediaTypeChange}
-              label="Media Type"
-              style={{
-                color: "#fff",
-                backgroundColor: "#444",
-                border: "1px solid #666",
-              }}
-            >
-              <MenuItem value="movie">Movies</MenuItem>
-              <MenuItem value="tv">TV Shows</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid> */}
       </Grid>
 
-      {/* <HorizontalScollCard
-        data={trendingData}
-        heading={"Trending"}
-        trending={true}
-      /> */}
-      <HorizontalScollCard
-        data={filteredNowPlaying}
-        heading={"Now Playing"}
-        media_type={"movie"}
-        className="now-playing-card"
-      />
-      <HorizontalScollCard
-        data={filteredTopRated}
-        heading={"Top Rated Movies"}
-        media_type={"movie"}
-        className="top-rated-movies-card"
-      />
-      <HorizontalScollCard
-        data={filteredPopularTvShows}
-        heading={"Popular TV Show"}
-        media_type={"tv"}
-        className="popular-tv-show-card"
-      />
-      <HorizontalScollCard
-        data={filteredOnTheAirShows}
-        heading={"On The Air"}
-        media_type={"tv"}
-        className="on-the-air-card"
-      />
+      <div className="nowplaying">
+        <HorizontalScollCard
+          data={filteredNowPlaying}
+          heading={"Now Playing"}
+          media_type={"movie"}
+          className="now-playing-card"
+        />
+      </div>
+      <div className="toprated">
+        <HorizontalScollCard
+          data={filteredTopRated}
+          heading={"Top Rated Movies"}
+          media_type={"movie"}
+          className="top-rated-movies-card"
+        />
+      </div>
+      <div className="popular">
+        <HorizontalScollCard
+          data={filteredPopularTvShows}
+          heading={"Popular TV Show"}
+          media_type={"tv"}
+          className="popular-tv-show-card"
+        />
+      </div>
+      <div className="onair">
+        <HorizontalScollCard
+          data={filteredOnTheAirShows}
+          heading={"On The Air"}
+          media_type={"tv"}
+          className="on-the-air-card"
+        />
+      </div>
     </div>
   );
 };
