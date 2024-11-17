@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BannerHome from "../components/BannerHome";
 import { useSelector } from "react-redux";
 import HorizontalScollCard from "../components/HorizontalScollCard";
@@ -124,6 +124,47 @@ const Home = () => {
   const [city, setCity] = useState("");
   const [mediaType, setMediaType] = useState("movie"); // Can switch between 'movie' or 'tv'
 
+  const { transcript } = useMicrophone(); // Microphone context hook
+  const lastTranscriptRef = useRef(""); 
+
+  useEffect(() => {
+    if (transcript && transcript !== lastTranscriptRef.current) {
+        lastTranscriptRef.current = transcript;
+        const command = transcript.toLowerCase().trim();
+
+        console.log("Command received:", command);
+
+        // Handle Cinema Selection
+        cinemas.forEach((cinemaName) => {
+            const cinemaCommand = `cinema ${cinemaName.toLowerCase()}`;
+            if (command.includes(cinemaCommand)) {
+                setCinema(cinemaName);
+                console.log(`Cinema selected: ${cinemaName}`);
+            }
+        });
+
+        // Handle City Selection
+        cities.forEach((cityName) => {
+            const cityCommand = `city ${cityName.toLowerCase()}`;
+            if (command.includes(cityCommand)) {
+                setCity(cityName);
+                console.log(`City selected: ${cityName}`);
+            }
+        });
+
+        // Handle Genre Selection
+        const genreMap = mediaType === "movie" ? movieGenreMap : tvGenreMap;
+        Object.entries(genreMap).forEach(([genreId, genreName]) => {
+            const genreCommand = `genre ${genreName.toLowerCase()}`;
+            if (command.includes(genreCommand)) {
+                setGenre(genreId);
+                console.log(`Genre selected: ${genreName}`);
+            }
+        });
+    }
+}, [transcript, mediaType, cinemas, cities]);
+
+  
   // Fetched data
   const trendingData = useSelector((state) => state.movieoData.bannerData);
   const { data: nowPlayingData } = useFetch("/movie/now_playing");
