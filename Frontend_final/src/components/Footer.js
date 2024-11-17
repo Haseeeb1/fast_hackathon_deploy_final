@@ -9,7 +9,9 @@ const Footer = () => {
   useEffect(() => {
     const fetchFooterLinks = async () => {
       try {
-        const response = await axios.get("http://192.168.137.1:5000/api/footer"); // Make sure your API endpoint matches this path
+        const response = await axios.get(
+          "https://fast-hackathon-deploy-backend.vercel.app/api/footer"
+        ); // Make sure your API endpoint matches this path
         console.log(response.data);
         setFooterLinks(response.data); // Store the footer links in state
       } catch (error) {
